@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * @author Przemek
  */
 @Configuration
-//@ComponentScan(basePackages = {"com.pc"})
+@ComponentScan(basePackages = {"com.pc.conapp.dao"})
 public class SpringRootConfig {
 // todo service, dao, dataSoruce, bussiness etc
 
