@@ -1,7 +1,7 @@
 package com.pc.conapp.dao;
 
 import com.pc.conapp.pojo.User;
-import com.sun.xml.internal.bind.api.JAXBRIContext;
+import com.pc.conapp.rm.UserRowMapper;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,17 +73,22 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
 
     @Override
     public User findById(Integer userId) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String select = "SELECT user_id, name, phone, email, address, login, role, login_status "
+                + "FROM user WHERE user_id = ?";
+        return super.getJdbcTemplate().queryForObject(select, new UserRowMapper(), userId);
     }
 
     @Override
     public List<User> findAll() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String select = "SELECT user_id, name, phone, email, address, login, role, login_status FROM user";
+        return super.getJdbcTemplate().query(select, new UserRowMapper());
     }
 
     @Override
     public List<User> findByProperty(String propertyName, Object propertyValue) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String select = "SELECT user_id, name, phone, email, address, login, role, login_status "
+                + "FROM user WHERE " + propertyName + " = ?";
+        return super.getJdbcTemplate().query(select, new UserRowMapper(), propertyValue);
     }
 
 }

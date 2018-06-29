@@ -96,4 +96,16 @@ public class User {
         this.loginStatus = loginStatus;
     }
 
+    @Override
+    public String toString() {
+        return "\n User{" + "userId=" + userId 
+                + ", name=" + name 
+                + ", phone=" + phone 
+                + ", email=" + email 
+                + ", address=" + address 
+                + ", login=" + login 
+                + ", role=" + role 
+                + ", loginStatus=" + loginStatus + '}';
+    }
+
 }

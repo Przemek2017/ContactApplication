@@ -78,4 +78,9 @@ public class Contact {
         this.remark = remark;
     }
 
+    @Override
+    public String toString() {
+        return "Contact{" + "contactId=" + contactId + ", userId=" + userId + ", name=" + name + ", phone=" + phone + ", email=" + email + ", address=" + address + ", remark=" + remark + '}';
+    }
+
 }
