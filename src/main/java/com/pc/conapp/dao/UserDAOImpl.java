@@ -49,15 +49,15 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
                 + " role = :role,"
                 + " login_status = :login_status"
                 + " WHERE user_id = :user_id";
-        Map insertMap = new HashMap();
-        insertMap.put("name", user.getName());
-        insertMap.put("phone", user.getPhone());
-        insertMap.put("email", user.getEmail());
-        insertMap.put("address", user.getAddress());
-        insertMap.put("role", user.getRole());
-        insertMap.put("login_status", user.getLoginStatus());
-        insertMap.put("user_id", user.getUserId());
-        super.getNamedParameterJdbcTemplate().update(update, insertMap);
+        Map updatetMap = new HashMap();
+        updatetMap.put("name", user.getName());
+        updatetMap.put("phone", user.getPhone());
+        updatetMap.put("email", user.getEmail());
+        updatetMap.put("address", user.getAddress());
+        updatetMap.put("role", user.getRole());
+        updatetMap.put("login_status", user.getLoginStatus());
+        updatetMap.put("user_id", user.getUserId());
+        super.getNamedParameterJdbcTemplate().update(update, updatetMap);
     }
 
     @Override

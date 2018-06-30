@@ -1,4 +1,3 @@
-
 package com.pc.conapp.test;
 
 import com.pc.conapp.config.SpringRootConfig;
@@ -25,5 +24,5 @@ public class TestDataSource {
         jt.update(insert, insertParam);
         System.out.println("********** SQL EXECUTE **********");
     }
-    
+
 }
