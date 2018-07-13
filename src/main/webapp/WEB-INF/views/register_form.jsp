@@ -15,7 +15,7 @@
         <s:url var="css_url" value="static/css/style.css" />
         <link href="${css_url}" rel="stylesheet" type="text/css">
         <s:url var="bg_url" value="/static/images/bg.jpg" />
-        <title>Login - Contact Application</title>
+        <title>Registration</title>
     </head>
     <body background="${bg_url}">
         <table border="0" width="80%" cellpadding="3" align="center">
@@ -33,31 +33,45 @@
             </tr>
             <tr>
                 <td height = "350px">
-                    <s:url var="url_login" value="/login" />
-                    <f:form class="login" action="${url_login}" modelAttribute="command">
+                    <s:url var="url_reg" value="/register" />
+                    <f:form class="login" action="${url_reg}" modelAttribute="command">
                         <table>
-                            <c:if test="${err != null}">
-                                <p class="error">${err}</p>
-                            </c:if>
-                            <c:if test="${param.act eq 'lo'}">
-                                <p class="success">Logout successfully</p>
-                            </c:if>
-                            <c:if test="${param.act eq 'reg'}">
-                                <p class="success">User registered successfully</p>
+                            <c:if test="${param.act eq 're'}" class="error">
+                                <p class="success">Register successfully</p>
                             </c:if>
                             <tr>
                                 <td>
-                                    <f:input path="login" placeholder="Login" class="login-input"/>
+                                    <f:input path="user.name" placeholder="Name" class="login-input"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <f:password path="password" placeholder="Password" class="login-input"/>
+                                    <f:input path="user.phone" placeholder="Phone" class="login-input"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <button class="login-button">Lets go!</button>
+                                    <f:input path="user.email" placeholder="E-mail" class="login-input"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <f:input path="user.address" placeholder="Address" class="login-input"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <f:input path="user.login" placeholder="Login" class="login-input"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <f:password path="user.password" placeholder="Password" class="login-input"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="login-button">Submit</button>
                                 </td>
                             </tr>
                         </table>

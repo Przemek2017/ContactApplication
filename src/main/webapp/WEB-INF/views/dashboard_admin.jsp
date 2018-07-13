@@ -10,12 +10,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="static/css/style.css" rel="stylesheet" type="text/css">
-        <title>Dashboadr Admin</title>
+        <s:url var="css_url" value="static/css/style.css" />
+        <link href="${css_url}" rel="stylesheet" type="text/css">
+        <s:url var="bg_url" value="/static/images/bg.jpg" />
+        <title>Admin Dashboard</title>
     </head>
-    <s:url var="bg_url" value="/static/images/bg.jpg" />
-    <body >
-        <table border="0" width="80%" cellpadding="3" align="center" background="/static/images/bg.jpg">
+    <body background="${bg_url}">
+        <p align="right">Welcome ${sessionScope.userName}</p>
+        <table border="0" width="80%" cellpadding="3" align="center">
             <tr>
                 <td height = "80px">
                     <!--HEADER-->
