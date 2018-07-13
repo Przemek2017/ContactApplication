@@ -36,8 +36,8 @@
                     <s:url var="url_reg" value="/register" />
                     <f:form class="login" action="${url_reg}" modelAttribute="command">
                         <table>
-                            <c:if test="${param.act eq 're'}" class="error">
-                                <p class="success">Register successfully</p>
+                            <c:if test="${err != null}">
+                                <p class="error">${err}</p>
                             </c:if>
                             <tr>
                                 <td>

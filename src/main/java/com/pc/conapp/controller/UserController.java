@@ -7,6 +7,7 @@ import com.pc.conapp.pojo.User;
 import com.pc.conapp.service.UserService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -80,11 +81,17 @@ public class UserController {
     
     @RequestMapping(value = "/register")
     public String registerUser(@ModelAttribute("command") UserCommand userCommand, Model model){
-        User regUser = userCommand.getUser();
-        regUser.setRole(UserService.ROLE_USER);
-        regUser.setLoginStatus(UserService.LOGIN_STATUS_ACTIVE);
-        userService.register(regUser);
-        return "redirect:index?act=reg";
+        try {
+            User regUser = userCommand.getUser();
+            regUser.setRole(UserService.ROLE_USER);
+            regUser.setLoginStatus(UserService.LOGIN_STATUS_ACTIVE);
+            userService.register(regUser);
+            return "redirect:index?act=reg";
+        } catch (DuplicateKeyException dke) {
+            dke.getMessage();
+            model.addAttribute("err", "Login '" + userCommand.getUser().getLogin() + "' is alredy registered. Please select another login.");
+            return "register_form";
+        }
     }
     
     private void addUserSession(User user, HttpSession httpSession){
