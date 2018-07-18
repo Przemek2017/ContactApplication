@@ -40,39 +40,25 @@
                                 <p class="error">${err}</p>
                             </c:if>
                             <tr>
-                                <td>
-                                    <f:input path="user.name" placeholder="Name" class="login-input"/>
-                                </td>
+                                <td><f:input path="user.name" placeholder="Name" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <f:input path="user.phone" placeholder="Phone" class="login-input"/>
-                                </td>
+                                <td><f:input path="user.phone" placeholder="Phone" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <f:input path="user.email" placeholder="E-mail" class="login-input"/>
-                                </td>
+                                <td><f:input path="user.email" placeholder="E-mail" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <f:input path="user.address" placeholder="Address" class="login-input"/>
-                                </td>
+                                <td><f:input path="user.address" placeholder="Address" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <f:input path="user.login" placeholder="Login" class="login-input"/>
-                                </td>
+                                <td><f:input path="user.login" placeholder="Login" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <f:password path="user.password" placeholder="Password" class="login-input"/>
-                                </td>
+                                <td><f:password path="user.password" placeholder="Password" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <button class="login-button">Submit</button>
-                                </td>
+                                <td><button class="login-button">Submit</button></td>
                             </tr>
                         </table>
                     </f:form>
@@ -84,5 +70,6 @@
                     <jsp:include page="include/footer.jsp"/>
                 </td>
             </tr>
+        </table>
     </body>
 </html>

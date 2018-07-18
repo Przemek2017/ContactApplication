@@ -18,6 +18,7 @@
         <title>Contact form</title>
     </head>
     <body background="${bg_url}">
+        <p align="right">Welcome ${sessionScope.userName}</p>
         <table border="0" width="80%" cellpadding="3" align="center">
             <tr>
                 <td height = "80px">
@@ -40,34 +41,22 @@
                                 <p class="error">${err}</p>
                             </c:if>
                             <tr>
-                                <td>
-                                    <f:input path="name" placeholder="Name" class="login-input"/>
-                                </td>
+                                <td><f:input path="name" placeholder="Name" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <f:input path="phone" placeholder="Phone" class="login-input"/>
-                                </td>
+                                <td><f:input path="phone" placeholder="Phone" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <f:input path="email" placeholder="E-mail" class="login-input"/>
-                                </td>
+                                <td><f:input path="email" placeholder="E-mail" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <f:input path="address" placeholder="Address" class="login-input"/>
-                                </td>
+                                <td><f:input path="address" placeholder="Address" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <f:textarea path="remark" placeholder="Remark" class="login-input"/>
-                                </td>
+                                <td><f:textarea path="remark" placeholder="Remark" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <button class="login-button">Save</button>
-                                </td>
+                                <td><button class="login-button">Save</button></td>
                             </tr>
                         </table>
                     </f:form>
@@ -79,5 +68,6 @@
                     <jsp:include page="include/footer.jsp"/>
                 </td>
             </tr>
+        </table>
     </body>
 </html>

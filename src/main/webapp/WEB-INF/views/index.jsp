@@ -4,6 +4,7 @@
     Author     : Przemek
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
@@ -32,33 +33,27 @@
                 </td>
             </tr>
             <tr>
-                <td height = "350px">
+                <td height="350px">
+                    <c:if test="${err != null}">
+                        <p class="error">${err}</p>
+                    </c:if>
+                    <c:if test="${param.act eq 'lo'}">
+                        <p class="success">Logout successfully</p>
+                    </c:if>
+                    <c:if test="${param.act == 'reg'}">
+                        <p class="success">User registered successfully</p>
+                    </c:if>
                     <s:url var="url_login" value="/login" />
                     <f:form class="login" action="${url_login}" modelAttribute="command">
                         <table>
-                            <c:if test="${err != null}">
-                                <p class="error">${err}</p>
-                            </c:if>
-                            <c:if test="${param.act eq 'lo'}">
-                                <p class="success">Logout successfully</p>
-                            </c:if>
-                            <c:if test="${param.act eq 'reg'}">
-                                <p class="success">User registered successfully</p>
-                            </c:if>
                             <tr>
-                                <td>
-                                    <f:input path="login" placeholder="Login" class="login-input"/>
-                                </td>
+                                <td> <f:input path="login" placeholder="Login" class="login-input"/></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <f:password path="password" placeholder="Password" class="login-input"/>
-                                </td>
+                                <td> <f:password path="password" placeholder="Password" class="login-input"/> </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <button class="login-button">Lets go!</button>
-                                </td>
+                                <td> <button class="login-button">Lets go!</button> </td>
                             </tr>
                         </table>
                     </f:form>
@@ -70,5 +65,6 @@
                     <jsp:include page="include/footer.jsp"/>
                 </td>
             </tr>
+        </table>
     </body>
 </html>

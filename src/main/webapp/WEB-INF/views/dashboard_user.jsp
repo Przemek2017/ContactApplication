@@ -42,6 +42,7 @@
                     <jsp:include page="include/footer.jsp"/>
                 </td>
             </tr>
+        </table>
     </body>
 </html>
 
