@@ -40,7 +40,9 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/user/contact_list")
-    public String contactList() {
+    public String contactList(Model model, HttpSession httpSession) {
+        Integer userId = (Integer) httpSession.getAttribute("userId");
+        model.addAttribute("contactList", contactService.findUserContact(userId));
         return "contact_list";
     }
 }
