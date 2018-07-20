@@ -40,7 +40,7 @@ public class ContactDAOImpl extends BaseDAO implements ContactDAO {
     @Override
     public void update(Contact contact) {
         String update = "UPDATE contact SET"
-                + " user_id = :user_id, "
+                //+ " user_id = :user_id, "
                 + " name = :name, "
                 + " phone = :phone, "
                 + " email = :email, "
@@ -49,7 +49,7 @@ public class ContactDAOImpl extends BaseDAO implements ContactDAO {
                 + " WHERE contact_id = :contact_id";
         Map updateMap = new HashMap();
         updateMap.put("contact_id", contact.getContactId());
-        updateMap.put("user_id", contact.getUserId());
+        //updateMap.put("user_id", contact.getUserId());
         updateMap.put("name", contact.getName());
         updateMap.put("phone", contact.getPhone());
         updateMap.put("email", contact.getPhone());

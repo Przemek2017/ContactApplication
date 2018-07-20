@@ -12,6 +12,7 @@ public interface ContactService {
     public void update(Contact contact);
     public void delete(Integer contactId);
     public void delete(Integer[] contactIds);
+    public Contact findById(Integer contactId);;
     /**
      * Method returns all user contacts.
      * @param userId

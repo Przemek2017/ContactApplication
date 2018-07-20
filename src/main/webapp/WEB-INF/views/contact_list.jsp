@@ -36,10 +36,17 @@
 
             <tr>
                 <td height = "350px">
-                    <h4>Contact list</h4>
+                    <h4>Contact list</h4> 
+                    <c:if test="${param.act eq 'del'}">
+                        <p class="success">Contact deleted successfully</p>
+                    </c:if>
+                    <c:if test="${param.act eq 'edt'}">
+                        <p class="success">Contact updated successfully</p>
+                    </c:if> 
                     <c:if test="${param.act eq 'sv'}">
                         <p class="success">Contact saved successfully</p>
                     </c:if>
+
                     <table border="0" width="80%" cellpadding="3">
                         <tr>
                             <th>Lp.</th>
@@ -51,10 +58,9 @@
                             <th>Action</th>
                         </tr>
                         <c:if test="${empty contactList}">
-                            <tr>
-                                <td align="center" class="error">Empty contact list</td>
-                            </tr>
+                            <tr><td align="center" class="error">Empty contact list</td></tr>
                         </c:if>
+
                         <c:forEach var="c" items="${contactList}" varStatus="lp">
                             <tr>
                                 <td>${lp.count}.</td>
@@ -63,7 +69,13 @@
                                 <td>${c.email}</td>
                                 <td>${c.address}</td>
                                 <td>${c.remark}</td>
-                                <td>Edit | Delete</td>
+                                <c:url var="url_del" value="/user/delete_contact">
+                                    <c:param name="cid" value="${c.contactId}"/>
+                                </c:url>
+                                <c:url var="url_edt" value="/user/edit_contact">
+                                    <c:param name="cid" value="${c.contactId}"/>
+                                </c:url>
+                                <td><a href="${url_edt}">Edit</a> | <a href="${url_del}">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </table>

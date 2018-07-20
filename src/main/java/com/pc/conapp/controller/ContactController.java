@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -26,16 +27,38 @@ public class ContactController {
         return "contact_form";
     }
 
+    @RequestMapping(value = "/user/edit_contact")
+    public String prepareEditForm(Model model, HttpSession httpSession, @RequestParam("cid") Integer contactId) {
+        httpSession.setAttribute("aContactId", contactId);
+        Contact c = contactService.findById(contactId);
+        model.addAttribute("command", c);
+        return "contact_form";
+    }
+
     @RequestMapping(value = "/user/save_contact")
-    public String addContact(@ModelAttribute("command") Contact contact, Model model, HttpSession httpSession) {
-        try {
-            Integer userId = (Integer) httpSession.getAttribute("userId");
-            contact.setUserId(userId);
-            contactService.save(contact);
-            return "redirect:contact_list?act=sv";
-        } catch (Exception e) {
-            model.addAttribute("err", "Failed to save contact");
-            return "contact_form";
+    public String saveOrUpdateContact(@ModelAttribute("command") Contact contact, Model model, HttpSession httpSession) {
+        Integer contactId = (Integer) httpSession.getAttribute("aContactId");
+        if (contactId == null) {
+            try {
+                Integer userId = (Integer) httpSession.getAttribute("userId");
+                contact.setUserId(userId);
+                contactService.save(contact);
+                return "redirect:contact_list?act=sv";
+            } catch (Exception e) {
+                e.printStackTrace();
+                model.addAttribute("err", "Failed to save contact");
+                return "contact_form";
+            }
+        } else {
+            try {
+                contact.setContactId(contactId);
+                contactService.update(contact);
+                return "redirect:contact_list?act=edt";
+            } catch (Exception e) {
+                e.printStackTrace();
+                model.addAttribute("err", "Failed to update contact");
+                return "contact_form";
+            }
         }
     }
 
@@ -45,4 +68,12 @@ public class ContactController {
         model.addAttribute("contactList", contactService.findUserContact(userId));
         return "contact_list";
     }
+
+
+    @RequestMapping(value = "/user/delete_contact")
+    public String deleteContact(@RequestParam("cid") Integer contactId) {
+        contactService.delete(contactId);
+        return "redirect:contact_list?act=del";
+    }
+
 }
