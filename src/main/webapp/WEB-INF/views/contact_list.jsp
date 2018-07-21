@@ -47,6 +47,12 @@
                         <p class="success">Contact saved successfully</p>
                     </c:if>
 
+                    <form action="<s:url value="/user/search_contact"/>"> 
+                        <input type="text" name="searchText" value="${param.searchText}" placeholder="Enter text to search">
+                        <button>Search</button>
+                    </form>
+                    </br>
+
                     <table border="0" width="80%" cellpadding="3">
                         <tr>
                             <th>Lp.</th>

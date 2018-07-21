@@ -52,7 +52,7 @@ public class ContactDAOImpl extends BaseDAO implements ContactDAO {
         //updateMap.put("user_id", contact.getUserId());
         updateMap.put("name", contact.getName());
         updateMap.put("phone", contact.getPhone());
-        updateMap.put("email", contact.getPhone());
+        updateMap.put("email", contact.getEmail());
         updateMap.put("address", contact.getAddress());
         updateMap.put("remark", contact.getRemark());
         super.getNamedParameterJdbcTemplate().update(update, updateMap);
