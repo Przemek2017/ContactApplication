@@ -52,39 +52,43 @@
                         <button>Search</button>
                     </form>
                     </br>
-
-                    <table border="0" width="80%" cellpadding="3">
-                        <tr>
-                            <th>Lp.</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Remark</th>
-                            <th>Action</th>
-                        </tr>
-                        <c:if test="${empty contactList}">
-                            <tr><td align="center" class="error">Empty contact list</td></tr>
-                        </c:if>
-
-                        <c:forEach var="c" items="${contactList}" varStatus="lp">
+                    <form action="<s:url value="/user/bulk_delete_contacts"/>">
+                        <button>Delete selected</button>
+                        <table border="0" width="80%" cellpadding="3">
                             <tr>
-                                <td>${lp.count}.</td>
-                                <td>${c.name}</td>
-                                <td>${c.phone}</td>
-                                <td>${c.email}</td>
-                                <td>${c.address}</td>
-                                <td>${c.remark}</td>
-                                <c:url var="url_del" value="/user/delete_contact">
-                                    <c:param name="cid" value="${c.contactId}"/>
-                                </c:url>
-                                <c:url var="url_edt" value="/user/edit_contact">
-                                    <c:param name="cid" value="${c.contactId}"/>
-                                </c:url>
-                                <td><a href="${url_edt}">Edit</a> | <a href="${url_del}">Delete</a></td>
+                                <th>Select</th>
+                                <th>Lp.</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th>Remark</th>
+                                <th>Action</th>
                             </tr>
-                        </c:forEach>
-                    </table>
+                            <c:if test="${empty contactList}">
+                                <tr><td align="center" class="error">Empty contact list</td></tr>
+                            </c:if>
+
+                            <c:forEach var="c" items="${contactList}" varStatus="lp">
+                                <tr>
+                                    <td align="center"><input type="checkbox" name="cid" value="${c.contactId}"/></td>
+                                    <td>${lp.count}.</td>
+                                    <td>${c.name}</td>
+                                    <td>${c.phone}</td>
+                                    <td>${c.email}</td>
+                                    <td>${c.address}</td>
+                                    <td>${c.remark}</td>
+                                    <c:url var="url_del" value="/user/delete_contact">
+                                        <c:param name="cid" value="${c.contactId}"/>
+                                    </c:url>
+                                    <c:url var="url_edt" value="/user/edit_contact">
+                                        <c:param name="cid" value="${c.contactId}"/>
+                                    </c:url>
+                                    <td><a href="${url_edt}">Edit</a> | <a href="${url_del}">Delete</a></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </form>
                 </td>
             </tr>
 

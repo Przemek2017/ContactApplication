@@ -82,4 +82,10 @@ public class ContactController {
         return "redirect:contact_list?act=del";
     }
 
+    @RequestMapping(value = "/user/bulk_delete_contacts")
+    public String bulkSeleteContact(@RequestParam("cid") Integer[] contactIds) {
+        contactService.delete(contactIds);
+        return "redirect:contact_list?act=del";
+    }
+
 }
