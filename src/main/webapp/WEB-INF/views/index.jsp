@@ -16,6 +16,13 @@
         <s:url var="css_url" value="static/css/style.css" />
         <link href="${css_url}" rel="stylesheet" type="text/css">
         <s:url var="bg_url" value="/static/images/bg.jpg" />
+        <s:url var="jq_url" value="static/js/jquery-3.3.1.min.js" />
+        <script src="${jq_url}"></script>
+<!--        <script>
+            $(document).ready(function(){
+                alert('Welcome!');
+            });
+        </script>-->
         <title>Login - Contact Application</title>
     </head>
     <body background="${bg_url}">

@@ -16,6 +16,8 @@
         <s:url var="css_url" value="static/css/style.css" />
         <link href="${css_url}" rel="stylesheet" type="text/css">
         <s:url var="bg_url" value="/static/images/bg.jpg" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
         <title>Contact list</title>
     </head>
     <body background="${bg_url}">
@@ -47,47 +49,60 @@
                         <p class="success">Contact saved successfully</p>
                     </c:if>
 
-                    <form action="<s:url value="/user/search_contact"/>"> 
-                        <input type="text" name="searchText" value="${param.searchText}" placeholder="Enter text to search">
-                        <button>Search</button>
-                    </form>
                     </br>
                     <form action="<s:url value="/user/bulk_delete_contacts"/>">
-                        <button>Delete selected</button>
-                        <table border="0" width="80%" cellpadding="3">
-                            <tr>
-                                <th>Select</th>
-                                <th>Lp.</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Address</th>
-                                <th>Remark</th>
-                                <th>Action</th>
-                            </tr>
-                            <c:if test="${empty contactList}">
-                                <tr><td align="center" class="error">Empty contact list</td></tr>
-                            </c:if>
-
-                            <c:forEach var="c" items="${contactList}" varStatus="lp">
+                        <button id="deleteButton" >Delete selected</button>
+                        <table border="0" width="100%" cellpadding="3" id="jtable">
+                            <thead>
                                 <tr>
-                                    <td align="center"><input type="checkbox" name="cid" value="${c.contactId}"/></td>
-                                    <td>${lp.count}.</td>
-                                    <td>${c.name}</td>
-                                    <td>${c.phone}</td>
-                                    <td>${c.email}</td>
-                                    <td>${c.address}</td>
-                                    <td>${c.remark}</td>
-                                    <c:url var="url_del" value="/user/delete_contact">
-                                        <c:param name="cid" value="${c.contactId}"/>
-                                    </c:url>
-                                    <c:url var="url_edt" value="/user/edit_contact">
-                                        <c:param name="cid" value="${c.contactId}"/>
-                                    </c:url>
-                                    <td><a href="${url_edt}">Edit</a> | <a href="${url_del}">Delete</a></td>
+                                    <th>Select</th>
+                                    <th>Lp.</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Remark</th>
+                                    <th>Action</th>
                                 </tr>
-                            </c:forEach>
-                        </table>
+                            </thead>
+                            <tbody>
+                                <c:if test="${empty contactList}">
+                                    <tr><td align="center" class="error">Empty contact list</td></tr>
+                                </c:if>
+
+                                <c:forEach var="c" items="${contactList}" varStatus="lp">
+                                    <tr align="center">
+                                        <td align="center"><input type="checkbox" name="cid" value="${c.contactId}"/></td>
+                                        <td>${lp.count}.</td>
+                                        <td>${c.name}</td>
+                                        <td>${c.phone}</td>
+                                        <td>${c.email}</td>
+                                        <td>${c.address}</td>
+                                        <td>${c.remark}</td>
+                                        <c:url var="url_del" value="/user/delete_contact">
+                                            <c:param name="cid" value="${c.contactId}"/>
+                                        </c:url>
+                                        <c:url var="url_edt" value="/user/edit_contact">
+                                            <c:param name="cid" value="${c.contactId}"/>
+                                        </c:url>
+                                        <td><a href="${url_edt}">Edit</a> | <a href="${url_del}">Delete</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>        
+                        <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+                        <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+                        <script type="text/javascript" charset="utf8" src="../static/js/simple_table.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                var cid = 'input[name="cid"]';
+                                var $submit = $("#deleteButton").hide();
+                                $(document).on("change", cid, function () {
+                                    console.log($(cid).is(":checked"));
+                                    $submit.toggle($(cid).is(":checked"));
+                                });
+                            });
+                        </script>
                     </form>
                 </td>
             </tr>

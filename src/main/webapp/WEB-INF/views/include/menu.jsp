@@ -8,11 +8,11 @@
 
 <c:if test="${sessionScope.userId == null}">
     <!--User is not logged-->
-    <a href="/ContactApplication/index">Home</a> | <a href="#">Login</a> | <a href="/ContactApplication/register_form">Register</a> | <a href="#">Help</a>
+    <a href="/ContactApplication/index">Home</a> | <a href="/ContactApplication/index">Login</a> | <a href="/ContactApplication/register_form">Register</a> | <a href="#">Help</a>
 </c:if>
 <c:if test="${sessionScope.userId != null && sessionScope.userRole eq 1}">
     <!--Admin is logged - Admin menu-->
-    <a href="/ContactApplication/admin/dashboard">Home</a> | <a href="#">User list</a> | <a href="/ContactApplication/logout">Logout</a>
+    <a href="/ContactApplication/admin/dashboard">Home</a> | <a href="/ContactApplication/admin/users">User list</a> | <a href="/ContactApplication/logout">Logout</a>
 </c:if>
 <c:if test="${sessionScope.userId != null && sessionScope.userRole eq 2}">
     <!--User is logged - user menu-->

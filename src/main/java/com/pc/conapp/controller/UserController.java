@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -65,22 +67,28 @@ public class UserController {
     public String adminDashboard() {
         return "dashboard_admin";
     }
-    
+
+    @RequestMapping(value = {"/admin/users"})
+    public String getUserList(Model model) {
+        model.addAttribute("userList", userService.getUserList());
+        return "users";
+    }
+
     @RequestMapping(value = "/logout")
-    public String logout(HttpSession httpSession){
+    public String logout(HttpSession httpSession) {
         httpSession.invalidate();
         return "redirect:index?act=lo";
     }
-    
-    @RequestMapping(value ="/register_form")
-    public String registrationForm(Model model){
+
+    @RequestMapping(value = "/register_form")
+    public String registrationForm(Model model) {
         UserCommand userCommand = new UserCommand();
         model.addAttribute("command", userCommand);
         return "register_form";
     }
-    
+
     @RequestMapping(value = "/register")
-    public String registerUser(@ModelAttribute("command") UserCommand userCommand, Model model){
+    public String registerUser(@ModelAttribute("command") UserCommand userCommand, Model model) {
         try {
             User regUser = userCommand.getUser();
             regUser.setRole(UserService.ROLE_USER);
@@ -93,8 +101,20 @@ public class UserController {
             return "register_form";
         }
     }
-    
-    private void addUserSession(User user, HttpSession httpSession){
+
+    @RequestMapping(value = "/admin/change_status")
+    @ResponseBody
+    public String changeLoginStatus(@RequestParam Integer userId, @RequestParam Integer loginStatus) {
+        try {
+            userService.changeLoginStatus(userId, loginStatus);
+            return "SUCCESS: status changed";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "ERROR: Unable to change status";
+        }
+    }
+
+    private void addUserSession(User user, HttpSession httpSession) {
         httpSession.setAttribute("user", user);
         httpSession.setAttribute("userId", user.getUserId());
         httpSession.setAttribute("userRole", user.getRole());

@@ -69,13 +69,6 @@ public class ContactController {
         return "contact_list";
     }
 
-    @RequestMapping(value = "/user/search_contact")
-    public String contactSearch(Model model, HttpSession httpSession, @RequestParam("searchText") String searchText) {
-        Integer userId = (Integer) httpSession.getAttribute("userId");
-        model.addAttribute("contactList", contactService.findUserContact(userId, searchText));
-        return "contact_list";
-    }
-
     @RequestMapping(value = "/user/delete_contact")
     public String deleteContact(@RequestParam("cid") Integer contactId) {
         contactService.delete(contactId);

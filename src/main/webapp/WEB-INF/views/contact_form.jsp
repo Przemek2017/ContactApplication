@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <s:url var="css_url" value="static/css/style.css" />
+        <s:url var="css_url" value="/static/css/style.css" />
         <link href="${css_url}" rel="stylesheet" type="text/css">
         <s:url var="bg_url" value="/static/images/bg.jpg" />
         <title>Contact form</title>

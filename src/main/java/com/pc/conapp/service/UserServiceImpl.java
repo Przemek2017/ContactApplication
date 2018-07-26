@@ -48,12 +48,16 @@ public class UserServiceImpl extends BaseDAO implements UserService {
 
     @Override
     public List<User> getUserList() {
-        return userDAO.findAll();
+        return userDAO.findByProperty("role", UserService.ROLE_USER);
     }
 
     @Override
     public void changeLoginStatus(Integer userId, Integer loginStatus) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String update = "UPDATE user SET login_status = :lStatus WHERE user_id = :uId";
+        Map map = new HashMap();
+        map.put("lStatus", loginStatus);
+        map.put("uId", userId);
+        super.getNamedParameterJdbcTemplate().update(update, map);
     }
 
 }

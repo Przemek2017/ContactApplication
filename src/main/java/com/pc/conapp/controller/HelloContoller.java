@@ -6,7 +6,6 @@
 package com.pc.conapp.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,9 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class HelloContoller {
-    
+
     @RequestMapping("/test/hello")
-    public ModelAndView seyHello(ModelAndView mav){
+    public ModelAndView seyHello(ModelAndView mav) {
         mav.setViewName("hello");
         mav.addObject("message", "Hello Przemek!!!!!");
         return mav;
