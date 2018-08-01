@@ -51,7 +51,9 @@
 
                     </br>
                     <form action="<s:url value="/user/bulk_delete_contacts"/>">
-                        <button id="deleteButton" >Delete selected</button>
+                        <c:if test="${!empty contactList}">
+                            <button id="deleteButton" >Delete selected</button>
+                        </c:if>
                         <table border="0" width="100%" cellpadding="3" id="jtable">
                             <thead>
                                 <tr>
@@ -85,11 +87,20 @@
                                         <c:url var="url_edt" value="/user/edit_contact">
                                             <c:param name="cid" value="${c.contactId}"/>
                                         </c:url>
-                                        <td><a href="${url_edt}">Edit</a> | <a href="${url_del}">Delete</a></td>
+                                        <c:url var="url_email" value="/user/email_form">
+                                            <c:param name="cmail" value="${c.email}"/>
+                                        </c:url>
+                                        <td>
+                                            <a href="${url_edt}">Edit</a> | 
+                                            <a href="${url_del}">Delete</a> 
+                                        <c:if test="${!c.email eq '' || !empty c.email}">
+                                             | <a href="${url_email}">E-mail</a>
+                                        </c:if>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
-                        </table>        
+                        </table>      
                         <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
                         <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
                         <script type="text/javascript" charset="utf8" src="../static/js/simple_table.js"></script>
@@ -106,7 +117,11 @@
                     </form>
                 </td>
             </tr>
-
+            <br/>
+            <c:url var="url_export_excel" value="/user/export/?type=excel"></c:url>
+            <c:url var="url_export_pdf" value="/user/export/?type=pdf"></c:url>
+            <td><a href="${url_export_excel}">Export to excel</a>  
+            <td><a href="${url_export_pdf}">Export to pdf</a>  
             <tr>
                 <td height = "25">
                     <!--FOOTER-->

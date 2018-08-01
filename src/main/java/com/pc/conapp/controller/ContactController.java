@@ -80,5 +80,5 @@ public class ContactController {
         contactService.delete(contactIds);
         return "redirect:contact_list?act=del";
     }
-
+    
 }

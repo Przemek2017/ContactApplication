@@ -85,7 +85,8 @@ public class ContactDAOImpl extends BaseDAO implements ContactDAO {
     @Override
     public List<Contact> findByProperty(String propertyName, Object propertyValue) {
         String select = "SELECT contact_id, user_id, name, phone, email, address, remark "
-                + "FROM contact WHERE " + propertyName + " = ?";
+                + "FROM contact WHERE " + propertyName + " = ? "
+                + "ORDER BY contact_id";
         return super.getJdbcTemplate().query(select, new ContactRowMapper(), propertyValue);
     }
 
